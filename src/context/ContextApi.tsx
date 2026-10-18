@@ -21,7 +21,7 @@ type DataContextProps = {
 const defaultValue: DataContextProps = {
   count: 0,
   setCount: () => {},
-  lang: "en",
+  lang: "el",
   setLang: () => {},
   changeType: () => {},
 };
@@ -34,7 +34,7 @@ type ProviderProps = {
 
 export function DataContextProvider({ children }: ProviderProps) {
   const [count, setCount] = useState(0);
-  const [lang, setLang] = useState<Lang>("en");
+  const [lang, setLang] = useState<Lang>("el");
 
   useEffect(() => {
     document.documentElement.setAttribute("lang", lang);
