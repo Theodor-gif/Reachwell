@@ -42,3 +42,25 @@ function Home() {
 export default Home;
 
 */
+
+/*
+type car = [string, string, string];
+
+let obj: car = ["1", "2", "3"];
+
+console.log(obj);
+
+type student = {
+  name: string;
+  age: number;
+};
+
+type orderStudent = [
+  [key: string]: student;
+];
+
+const links: orderStudent = [
+  { name: "Alex", age: 20 },
+  { name: "Marios", age: 25 },
+];
+*/
