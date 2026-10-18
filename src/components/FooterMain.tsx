@@ -12,7 +12,7 @@ function FooterMain() {
   };
 
   const data: inside[] = [
-    { to: "/", en: "Finding a Job", el: "Εύρεση Εργασίας" },
+    { to: "/", en: "Post a Job Search", el: "Καταχώρηση Αναζήτησης Εργασίας" },
     {
       to: "/",
       en: "Create a Candidate Profile",
@@ -31,6 +31,11 @@ function FooterMain() {
       to: "/",
       en: "Job Posting",
       el: "Καταχώρηση Αγγελίας Εργασίας",
+    },
+    {
+      to: "/",
+      en: "Create a Employer Profile",
+      el: "Δημιουργία Προφίλ Εργοδότη",
     },
   ];
 

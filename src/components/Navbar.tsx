@@ -18,9 +18,7 @@ function Navbar() {
       </NavLink>
 
       <div className="flex flex-3 gap-10 pl-5">
-        <NavLink to="/Account">
-          {lang === "en" ? "Home" : "Αρχική Σελίδα"}
-        </NavLink>
+        <NavLink to="/">{lang === "en" ? "Home" : "Αρχική Σελίδα"}</NavLink>
         <NavLink to="/jobPosition">
           {lang === "en" ? "Jobs" : "Αγγελίες"}
         </NavLink>
