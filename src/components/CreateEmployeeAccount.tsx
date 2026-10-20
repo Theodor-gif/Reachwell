@@ -6,7 +6,7 @@ import SeePasswordIcon from "../assets/seePassword.png";
 import SeeNotPasswordIcon from "../assets/seeNotPassword.png";
 
 function CreateEmployeeAccount() {
-  const { lang } = useContext(dataContext);
+  const { lang, areas } = useContext(dataContext);
   const symbol: string = "*";
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -140,23 +140,22 @@ function CreateEmployeeAccount() {
         <label htmlFor="city">
           {lang === "en" ? "City / Area " : "Πόλη / Περιοχή "}
           <span>*</span>
+          <div className="flex gap-5">
+            <select className="w-50 border-b mb-5 bg-blue-50" required>
+              {areas.map((item) => (
+                <option key={item.id} value={item.areaEl}>
+                  {lang === "en" ? item.areaEn : item.areaEl}
+                </option>
+              ))}
+            </select>
+            <span className="hidden">
+              <img className="w-3.5" src={CorrectIcon} alt="correct-icon" />
+            </span>
+            <span className="hidden">
+              <img className="w-3.5" src={WrongIcon} alt="wrong-icon" />
+            </span>
+          </div>
         </label>
-        <div className="flex items-center gap-5 mb-5">
-          <input
-            className="border-b w-50 bg-blue-50"
-            id="city"
-            type="text"
-            name="city"
-            placeholder="Athens"
-            required
-          />
-          <span className="hidden">
-            <img className="w-3.5" src={CorrectIcon} alt="correct-icon" />
-          </span>
-          <span className="hidden">
-            <img className="w-3.5" src={WrongIcon} alt="wrong-icon" />
-          </span>
-        </div>
         <label htmlFor="password">
           {lang === "en" ? "Password" : "Κωδικός"} <span>*</span>
         </label>
