@@ -15,8 +15,8 @@ function Home() {
         <HeaderSearch />
       </section>
       <HomeAccountInfo />
-      <HomeListAreas />
       <HomeListJobs />
+      <HomeListAreas />
       <Footer />
     </main>
   );

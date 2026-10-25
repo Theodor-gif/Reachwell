@@ -22,7 +22,7 @@ function Navbar() {
         <NavLink to="/jobPosition">
           {lang === "en" ? "Jobs" : "Αγγελίες"}
         </NavLink>
-        <NavLink to="/">
+        <NavLink to="/CreatePost">
           {lang === "en" ? "Post an ad" : "Καταχώρηση αγγελίας"}
         </NavLink>
       </div>

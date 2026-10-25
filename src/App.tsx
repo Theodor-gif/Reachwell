@@ -4,6 +4,7 @@ import Home from "./pages/Home.tsx";
 import Account from "./pages/Account.tsx";
 import JobPosition from "./pages/Job.position.tsx";
 import JobPositionDetail from "./pages/Job.position.detail.tsx";
+import CreatePost from "./pages/Create.post.tsx";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Route path="/Account" element={<Account />} />
       <Route path="/JobPosition" element={<JobPosition />} />
       <Route path="/JobPositionDetail" element={<JobPositionDetail />} />
+      <Route path="/CreatePost" element={<CreatePost />} />
     </Routes>
   );
 }

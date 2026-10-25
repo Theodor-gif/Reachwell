@@ -16,12 +16,14 @@ function CreateEmployeeAccount() {
   return (
     <section className="flex w-[80%] m-[50px_auto_100px_auto] gap-10">
       <form className="flex flex-1 flex-col  p-10 bg-blue-50">
-        <label className="flex flex-col gap-1">
+        <label htmlFor="userType" className="flex flex-col gap-1">
           {lang === "en" ? `I am a... ${symbol}` : `Είμαι... ${symbol}`}
           <div>
             <select
+              id="userType"
               className="w-50 border-b mb-5 bg-blue-50"
               required
+              autoComplete="off"
               // value={userType}
               // onChange={(e) => setUserType(e.target.value)}
             >
@@ -52,6 +54,7 @@ function CreateEmployeeAccount() {
             name="userName"
             placeholder={lang === "en" ? "John" : "Ανδρέας"}
             required
+            autoComplete="given-name"
           />
           <span className="hidden">
             <img className="w-3.5" src={CorrectIcon} alt="correct-icon" />
@@ -71,6 +74,7 @@ function CreateEmployeeAccount() {
             name="lastName"
             placeholder={lang === "en" ? "Richard" : "Παππάς"}
             required
+            autoComplete="family-name"
           />
           <span className="hidden">
             <img className="w-3.5" src={CorrectIcon} alt="correct-icon" />
@@ -86,10 +90,13 @@ function CreateEmployeeAccount() {
           <input
             className="border-b w-50 bg-blue-50"
             id="userAge"
-            type="text"
+            type="number"
+            min={16}
+            max={70}
             name="userAge"
             placeholder="25"
             required
+            autoComplete="off"
           />
           <span className="hidden">
             <img className="w-3.5" src={CorrectIcon} alt="correct-icon" />
@@ -109,6 +116,7 @@ function CreateEmployeeAccount() {
             name="email"
             placeholder="email@gmail.com"
             required
+            autoComplete="email"
           />
           <span className="hidden">
             <img className="w-3.5" src={CorrectIcon} alt="correct-icon" />
@@ -129,6 +137,7 @@ function CreateEmployeeAccount() {
             name="phone"
             placeholder="697...."
             required
+            autoComplete="tel"
           />
           <span className="hidden">
             <img className="w-3.5" src={CorrectIcon} alt="correct-icon" />
@@ -141,7 +150,12 @@ function CreateEmployeeAccount() {
           {lang === "en" ? "City / Area " : "Πόλη / Περιοχή "}
           <span>*</span>
           <div className="flex gap-5">
-            <select className="w-50 border-b mb-5 bg-blue-50" required>
+            <select
+              id="city"
+              className="w-50 border-b mb-5 bg-blue-50"
+              required
+              autoComplete="address"
+            >
               {areas.map((item) => (
                 <option key={item.id} value={item.areaEl}>
                   {lang === "en" ? item.areaEn : item.areaEl}
@@ -166,6 +180,7 @@ function CreateEmployeeAccount() {
             type={passwordType}
             name="password"
             required
+            autoComplete="new-password"
           />
           <button
             type="button"
