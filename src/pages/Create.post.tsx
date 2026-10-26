@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { dataContext } from "../context/ContextApi.tsx";
 
 function CreatePost() {
-  const { lang, jobs, areas } = useContext(dataContext);
+  const { lang, jobs, areas, skill } = useContext(dataContext);
   const [show, setShow] = useState<boolean>(false);
 
   type typesData = {
@@ -198,14 +198,23 @@ function CreatePost() {
         <label htmlFor="Skills"></label>
         {show && (
           <ul className="overflow-auto h-20">
-            {educationLevel.map((item) => (
+            {skill.map((item) => (
               <li>
-                {item.educationEl}
-                <input type="checkbox" value={item.educationEl} />
+                {lang === "en" ? item.skillEn : item.skillEl}
+                <input type="checkbox" value={item.skillEl} />
               </li>
             ))}
           </ul>
         )}
+        <h3>Salary</h3>
+        <label htmlFor="grossAmount">Gross amount in &euro;</label>
+        <input id="grossAmount" type="number" name="grossAmount" />
+        <label htmlFor="salaryPer">
+          Salary per
+          <select>
+            <option></option>
+          </select>
+        </label>
       </form>
       <Footer />
     </section>

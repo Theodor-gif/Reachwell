@@ -9,6 +9,7 @@ import {
 } from "react";
 import jobsData from "../data/jobs.ts";
 import areasData from "../data/areas.ts";
+import { type skillsData, skills } from "../data/skills.ts";
 
 type Lang = "en" | "el";
 
@@ -32,6 +33,7 @@ type DataContextProps = {
   areas: areaData[];
   changeType: () => void;
   jobs: jobsData[];
+  skill: skillsData[];
 };
 
 const defaultValue: DataContextProps = {
@@ -42,6 +44,7 @@ const defaultValue: DataContextProps = {
   areas: [],
   changeType: () => {},
   jobs: [],
+  skill: [],
 };
 
 export const dataContext = createContext<DataContextProps>(defaultValue);
@@ -55,6 +58,7 @@ export function DataContextProvider({ children }: ProviderProps) {
   const [lang, setLang] = useState<Lang>("el");
   const areas = areasData;
   const jobs = jobsData;
+  const skill = skills;
 
   useEffect(() => {
     document.documentElement.setAttribute("lang", lang);
@@ -70,7 +74,7 @@ export function DataContextProvider({ children }: ProviderProps) {
 
   return (
     <dataContext.Provider
-      value={{ count, setCount, lang, setLang, areas, changeType, jobs }}
+      value={{ count, setCount, lang, setLang, areas, changeType, jobs, skill }}
     >
       {children}
     </dataContext.Provider>
