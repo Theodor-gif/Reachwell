@@ -4,7 +4,8 @@ import { useContext, useState } from "react";
 import { dataContext } from "../context/ContextApi.tsx";
 
 function CreatePost() {
-  const { lang, jobs, areas, skill } = useContext(dataContext);
+  const { lang, jobs, areas, skill, salary, employeeAmount, timeRange } =
+    useContext(dataContext);
   const [show, setShow] = useState<boolean>(false);
 
   type typesData = {
@@ -42,7 +43,7 @@ function CreatePost() {
       employmentEl: "Ελεύθερος επαγγελματίας",
       employmentEn: "Freelance",
     },
-    { id: "7", employmentEl: "Πρακτική άσκηση", employmentEn: "Intership" },
+    { id: "7", employmentEl: "Πρακτική άσκηση", employmentEn: "Internship" },
   ];
 
   const locationType: locationData[] = [
@@ -106,10 +107,13 @@ function CreatePost() {
     <section>
       <Navbar />
       <h1>Employeer create job position form:</h1>
-      <form className="flex flex-col border">
-        <label htmlFor="jobPosition">
-          Position name
-          <select id="jobPosition">
+      <form className="flex flex-col w-[80%] m-auto">
+        <h2 className="text-lg mb-7.5">
+          {lang === "en" ? "Basic information" : "Βασικές πληροφορίες"}
+        </h2>
+        <label className="flex flex-col text-sm mb-5" htmlFor="jobPosition">
+          {lang === "en" ? "Job position" : "Θέση απασχόλησης"}
+          <select id="jobPosition" className="border-b w-50">
             {jobs.map((item) => (
               <option key={item.id}>
                 {lang === "en" ? item.jobEn : item.jobEl}
@@ -117,11 +121,18 @@ function CreatePost() {
             ))}
           </select>
         </label>
-        <label htmlFor="companyName">Company Name</label>
-        <input id="companyName" type="text" name="companyName" />
-        <label htmlFor="employmentType">
-          Type of employment
-          <select id="employmentType">
+        <label htmlFor="companyName" className="text-sm">
+          {lang === "en" ? "Company Name" : "Επωνυμία εταιρείας"}
+        </label>
+        <input
+          className="border-b w-50 mb-5"
+          id="companyName"
+          type="text"
+          name="companyName"
+        />
+        <label className="flex flex-col mb-5 text-sm" htmlFor="employmentType">
+          {lang === "en" ? "Type of employment" : "Τύπος απασχόλησης"}
+          <select id="employmentType" className="border-b w-50">
             <option value="">{lang === "en" ? "Select" : "Επιλέξτε"}</option>
             {employmentTypesData.map((item) => (
               <option key={item.id} value={item.employmentEl}>
@@ -130,9 +141,9 @@ function CreatePost() {
             ))}
           </select>
         </label>
-        <label htmlFor="locationType">
-          Job Location Type
-          <select id="locationType">
+        <label className="flex flex-col mb-5 text-sm" htmlFor="locationType">
+          {lang === "en" ? "Job Location Type" : "Τρόπος εργασίας"}
+          <select id="locationType" className="border-b w-50">
             <option value="">{lang === "en" ? "Select" : "Επιλέξτε"}</option>
             {locationType.map((item) => (
               <option key={item.id}>
@@ -141,9 +152,9 @@ function CreatePost() {
             ))}
           </select>
         </label>
-        <label htmlFor="jobArea">
-          Area
-          <select id="jobArea">
+        <label className="flex flex-col mb-7.5 text-sm" htmlFor="jobArea">
+          {lang === "en" ? "Area" : "Περιοχή"}
+          <select id="jobArea" className="border-b w-50">
             {areas.map((item) => (
               <option key={item.id} value={item.areaEl}>
                 {lang === "en" ? item.areaEn : item.areaEl}
@@ -151,17 +162,21 @@ function CreatePost() {
             ))}
           </select>
         </label>
-        <h3>Required qualifications</h3>
-        <label htmlFor="jobDescription">Job description</label>
+        <h2 className="text-lg mb-7.5">
+          {lang === "en" ? "Required qualifications" : "Απαιτούμενα προσόντα"}
+        </h2>
+        <label htmlFor="jobDescription" className="text-sm">
+          {lang === "en" ? "Job description" : "Περιγραφή θέσης"}
+        </label>
         <textarea
           id="jobDescription"
-          className="border"
+          className="border mb-5 w-100"
           cols={5}
           rows={5}
         ></textarea>
-        <label htmlFor="educationLevel">
-          Education level
-          <select>
+        <label htmlFor="educationLevel" className="flex flex-col text-sm mb-5">
+          {lang === "en" ? "Education level" : "Επίπεδο εκπαίδευσης"}
+          <select id="educationLevel" className="border-b w-50">
             <option value="">{lang === "en" ? "Select" : "Επιλέξτε"}</option>
             {educationLevel.map((item) => (
               <option key={item.id} value={item.educationEl}>
@@ -170,18 +185,20 @@ function CreatePost() {
             ))}
           </select>
         </label>
-        <label htmlFor="workExperience">
-          Relevant work experience
-          <select id="workExperience">
+        <label htmlFor="workExperience" className="flex flex-col mb-5 text-sm">
+          {lang === "en" ? "Relevant work experience" : "Σχετική προϋπηρεσία"}
+          <select id="workExperience" className="border-b w-50">
             <option value="">{lang === "en" ? "Select" : "Επιλέξτε"}</option>
             {workExperience.map((item) => (
-              <option value={item.experienceEl}>
+              <option key={item.id} value={item.experienceEl}>
                 {lang === "en" ? item.experienceEn : item.experienceEl}
               </option>
             ))}
           </select>
         </label>
-        <label htmlFor="jobSkillScreen">Skills</label>
+        <label htmlFor="jobSkillScreen" className="text-sm">
+          {lang === "en" ? "Skills" : "Δεξιότητες"}
+        </label>
         <div className="border flex">
           <input
             id="jobSkillScreen"
@@ -199,22 +216,77 @@ function CreatePost() {
         {show && (
           <ul className="overflow-auto h-20">
             {skill.map((item) => (
-              <li>
+              <li key={item.id}>
                 {lang === "en" ? item.skillEn : item.skillEl}
                 <input type="checkbox" value={item.skillEl} />
               </li>
             ))}
           </ul>
         )}
-        <h3>Salary</h3>
-        <label htmlFor="grossAmount">Gross amount in &euro;</label>
-        <input id="grossAmount" type="number" name="grossAmount" />
-        <label htmlFor="salaryPer">
-          Salary per
-          <select>
-            <option></option>
+        <h2 className="mb-7.5 mt-7.5 text-lg">
+          {lang === "en" ? "Salary" : "Μισθός"}
+        </h2>
+        <label htmlFor="grossAmount" className="text-sm">
+          {lang === "en" ? "Gross amount in \u20AC" : "Μικτό ποσό σε \u20AC"}
+        </label>
+        <input
+          id="grossAmount"
+          className="border-b w-50 mb-5"
+          type="number"
+          name="grossAmount"
+        />
+        <label htmlFor="salaryPer" className="flex flex-col text-sm">
+          {lang === "en" ? "Salary per" : "Μισθός ανά"}
+          <select id="salaryPer" className="border-b w-50 mb-7.5">
+            <option value="">{lang === "en" ? "Select" : "Επιλέξτε"}</option>
+            {salary.map((item) => (
+              <option key={item.id} value={item.salaryPerEl}>
+                {lang === "en" ? item.salaryPerEn : item.salaryPerEl}
+              </option>
+            ))}
           </select>
         </label>
+        <h2 className="text-lg mb-7.5">
+          {lang === "en" ? "Recruitment needs" : "Ανάγκες πρόσληψης"}
+        </h2>
+        <label htmlFor="employeeAmount" className="flex flex-col text-sm">
+          {lang === "en"
+            ? "How many employees do you need for this position"
+            : "Πόσους εργαζόμενους χρειάζεστε για αυτή τη θέση"}
+          <select
+            id="employeeAmount"
+            className="border-b w-50 mb-5"
+            name="employeeAmount"
+          >
+            <option value="">{lang === "en" ? "Select" : "Επιλέξτε"}</option>
+            {employeeAmount.map((item) => (
+              <option key={item.id} value={item.employeesEl}>
+                {lang === "en" ? item.employeesEn : item.employeesEl}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label htmlFor="daysRange" className="flex flex-col text-sm">
+          {lang === "en"
+            ? "How soon do you want to fill the position"
+            : "Πόσο σύντομα θέλετε να καλυφθεί η θέση"}
+          <select id="daysRange" className="border-b w-50 mb-5">
+            <option value="">{lang === "en" ? "Select" : "Επιλέξτε"}</option>
+            {timeRange.map((item) => (
+              <option key={item.id} value={item.daysEl}>
+                {lang === "en" ? item.daysEn : item.daysEl}
+              </option>
+            ))}
+          </select>
+        </label>
+        <div className="flex mt-15">
+          <button className="border w-50 p-2" type="submit">
+            {lang === "en" ? "Post job" : "Δημοσίευση αγγελίας"}
+          </button>
+          <button className="border w-50 p-2" type="reset">
+            {lang === "en" ? "Clear" : "Καθαρισμός"}
+          </button>
+        </div>
       </form>
       <Footer />
     </section>

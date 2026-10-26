@@ -10,6 +10,9 @@ import {
 import jobsData from "../data/jobs.ts";
 import areasData from "../data/areas.ts";
 import { type skillsData, skills } from "../data/skills.ts";
+import { type salaryPerType, salaryPer } from "../data/salaryPer.ts";
+import { type employeesType, employeesNum } from "../data/employeesNumber.ts";
+import { type daysType, daysRange } from "../data/time.ts";
 
 type Lang = "en" | "el";
 
@@ -34,6 +37,9 @@ type DataContextProps = {
   changeType: () => void;
   jobs: jobsData[];
   skill: skillsData[];
+  salary: salaryPerType[];
+  employeeAmount: employeesType[];
+  timeRange: daysType[];
 };
 
 const defaultValue: DataContextProps = {
@@ -45,6 +51,9 @@ const defaultValue: DataContextProps = {
   changeType: () => {},
   jobs: [],
   skill: [],
+  salary: [],
+  employeeAmount: [],
+  timeRange: [],
 };
 
 export const dataContext = createContext<DataContextProps>(defaultValue);
@@ -59,6 +68,9 @@ export function DataContextProvider({ children }: ProviderProps) {
   const areas = areasData;
   const jobs = jobsData;
   const skill = skills;
+  const salary = salaryPer;
+  const employeeAmount = employeesNum;
+  const timeRange = daysRange;
 
   useEffect(() => {
     document.documentElement.setAttribute("lang", lang);
@@ -74,7 +86,19 @@ export function DataContextProvider({ children }: ProviderProps) {
 
   return (
     <dataContext.Provider
-      value={{ count, setCount, lang, setLang, areas, changeType, jobs, skill }}
+      value={{
+        count,
+        setCount,
+        lang,
+        setLang,
+        areas,
+        changeType,
+        jobs,
+        skill,
+        salary,
+        employeeAmount,
+        timeRange,
+      }}
     >
       {children}
     </dataContext.Provider>
