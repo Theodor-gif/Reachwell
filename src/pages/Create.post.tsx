@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar.tsx";
 import Footer from "../components/Footer.tsx";
 import { useContext, useState } from "react";
 import { dataContext } from "../context/ContextApi.tsx";
+import Arrow from "../assets/arrowSymbol-icon.png";
 
 function CreatePost() {
   const { lang, jobs, areas, skill, salary, employeeAmount, timeRange } =
@@ -199,26 +200,31 @@ function CreatePost() {
         <label htmlFor="jobSkillScreen" className="text-sm">
           {lang === "en" ? "Skills" : "Δεξιότητες"}
         </label>
-        <div className="border flex">
-          <input
-            id="jobSkillScreen"
-            className="border w-50"
-            type="text"
-            readOnly
-          />
+        <div className="border flex justify-center w-50">
+          <input id="jobSkillScreen" className="w-50" type="text" readOnly />
           <div>
             <button type="button" onClick={() => setShow((e) => !e)}>
-              Arrow
+              <img src={Arrow} alt="arrow-icon" width="30" />
             </button>
           </div>
         </div>
-        <label htmlFor="Skills"></label>
         {show && (
-          <ul className="overflow-auto h-20">
+          <ul className="overflow-auto overflow-x-hidden h-50 border w-115 flex flex-col">
             {skill.map((item) => (
-              <li key={item.id}>
-                {lang === "en" ? item.skillEn : item.skillEl}
-                <input type="checkbox" value={item.skillEl} />
+              <li key={item.id} className="h-10 m-[2.5px_0_2.5px_0]">
+                <label
+                  htmlFor={`skill-${item.id}`}
+                  className="flex h-full cursor-pointer items-center justify-between px-3"
+                >
+                  <span>{lang === "en" ? item.skillEn : item.skillEl}</span>
+                  <input
+                    id={`skill-${item.id}`}
+                    className="h-5 w-5"
+                    type="checkbox"
+                    name="skills"
+                    value={item.id}
+                  />
+                </label>
               </li>
             ))}
           </ul>
@@ -234,6 +240,8 @@ function CreatePost() {
           className="border-b w-50 mb-5"
           type="number"
           name="grossAmount"
+          min="1"
+          max="100000"
         />
         <label htmlFor="salaryPer" className="flex flex-col text-sm">
           {lang === "en" ? "Salary per" : "Μισθός ανά"}
